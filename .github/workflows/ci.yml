@@ -1,0 +1,38 @@
+name: Run tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  Tests:
+    name: Perform testing
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+
+    - name: Prepare Selenium
+      uses: nanasess/setup-chromedriver@v2
+
+    - name: Configure Selenium
+      run: |
+        chromedriver --url-base=/wd/hub &
+        sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install python3-pip
+        pip3 install -r requirements.txt
+
+    - name: Run tests
+      run: pytest -rA
+      env: 
+        DISPLAY: :99
