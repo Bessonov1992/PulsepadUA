@@ -3,7 +3,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 
 
 class PulsepadAuthorization:
-    __ULR = 'https://pulsepad.com.ua'
+    __URL = 'https://pulsepad.com.ua'
 
     def __init__(self, driver: WebDriver):
         self.__driver = driver
@@ -14,7 +14,7 @@ class PulsepadAuthorization:
         self.auth_favicon_nickname_xpath = '//span[@class="tablet-elem tablet-elem--inline"]'
 
     def open(self):
-        self.__driver.get(self.__ULR)
+        self.__driver.get(self.__URL)
 
     def authorization(self, auth_data):
         element = self.__driver.find_element(By.XPATH, self.authorization_button_xpath)
