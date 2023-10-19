@@ -17,14 +17,14 @@ class PulsepadAuthorization:
         self.__driver.get(self.__URL)
 
     def authorization(self, auth_data):
-        element = self.__driver.find_element(By.XPATH, self.authorization_button_xpath)
-        element.click()
-        element = self.__driver.find_element(By.XPATH, self.auth_field_login_xpath)
-        element.send_keys(auth_data[0])
-        element = self.__driver.find_element(By.XPATH, self.auth_field_pass_xpath)
-        element.send_keys(auth_data[1])
-        element = self.__driver.find_element(By.XPATH, self.auth_button_enter)
-        element.click()
+        auth_button = self.__driver.find_element(By.XPATH, self.authorization_button_xpath)
+        auth_button.click()
+        input_login = self.__driver.find_element(By.XPATH, self.auth_field_login_xpath)
+        input_login.send_keys(auth_data[0])
+        input_pass = self.__driver.find_element(By.XPATH, self.auth_field_pass_xpath)
+        input_pass.send_keys(auth_data[1])
+        button_enter = self.__driver.find_element(By.XPATH, self.auth_button_enter)
+        button_enter.click()
 
     def is_authorizated(self, name: str) -> bool:
         auth_name = self.__driver.find_element(By.XPATH, self.auth_favicon_nickname_xpath).text
